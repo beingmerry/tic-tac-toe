@@ -1,6 +1,5 @@
 // 🌐 Global element references for passing tests
-const testTable = document.querySelectorAll("table");
-const testRows  = document.querySelectorAll("tr");
+let testTable = document.querySelectorAll("table");
 
 // 🌐 Global variables for passing tests
 let tableCheckPass  = false;
@@ -8,6 +7,7 @@ let rowCheckPass    = false;
 let columnCheckPass = false;
 
 function checkTable() {
+  testTable = document.querySelectorAll("table")
   if (testTable.length !== 1) {
     console.log("🚫 Table test failed: 1 Table element needed");
   } else {
