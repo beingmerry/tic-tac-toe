@@ -8,7 +8,7 @@ let columnCheckPass = false;
 
 // 🧪 click grid tests
 function clickGridTests() {
-  function ()
+
 }
 // 🧪 3x3 grid tests
 function gridTests() {
