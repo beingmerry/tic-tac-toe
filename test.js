@@ -1,20 +1,42 @@
 // 🌐 Global element references for passing tests
 let testTable = document.querySelectorAll("table");
+let testCells = document.querySelectorAll("td")
 
 // 🌐 Global variables for passing tests
-let tableCheckPass = false;
-let rowCheckPass = false;
+let cellClickPass   = false;
+let tableCheckPass  = false;
+let rowCheckPass    = false;
 let columnCheckPass = false;
 
-// 🧪 click grid tests
-function clickGridTests() {
-
+// 🧪 click grid tests, building a "visual" click test runner...
+function testCellClick(timeBetweenClicks = 500) {
+  // 1️⃣ First test pattern for the board, linear click on each cell 1-9
+  // Pattern match XOX,OXO,XOX
+  const testPattern1 = [ // tests clicks, tests turns (alternating game states?)
+    "X", "O", "X", 
+    "O", "X", "O", 
+    "X", "O", "X",
+  ]
+  testCells.forEach(cell => {
+    setTimeout(() => {
+      cell.click() // Click on each cell
+      console.log(`clicking Cell ${cell.id}...`)
+      if (cell.textContent === testPattern1[cell.id -1]) {
+        console.log(`✅ Expected Cell ${cell.id} to match "${testPattern1[cell.id - 1]}" and the value is ${cell.textContent}!`)
+        cellClickPass = true
+      } else {
+        console.log(`🚫 Expected Cell ${cell.id} to match "${testPattern1[cell.id - 1]}" and the value is ${cell.textContent}!`)
+        cellClickPass = false
+      }
+    }, timeBetweenClicks * [cell.id])  // not necessary, but nice for the visual tests
+  })
+  return "🚩 Starting cell click tests..." 
 }
 // 🧪 3x3 grid tests
-function gridTests() {
-  checkTable();
-  checkRows();
-  checkColumns();
+function testGrid(timeBetweenTests = 1000) {
+  setTimeout(checkTable, timeBetweenTests * 1) ;
+  setTimeout(checkRows, timeBetweenTests * 2);
+  setTimeout(checkColumns, timeBetweenTests * 3);
   function checkTable() {
     testTable = document.querySelectorAll("table");
     if (testTable.length !== 1) {
@@ -66,4 +88,5 @@ function gridTests() {
       }
     }
   }
+  return "🚩 Starting grid checks tests..."
 }
